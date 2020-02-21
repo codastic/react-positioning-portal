@@ -13,9 +13,9 @@
     "fix:lint": "tslint --fix -c tslint.json 'src/**/*.ts'",
     "fix:prettier": "prettier --config -l --write .prettierrc \"{src}/**/*.{ts,tsx}\""
   },
-  "main": "./lib/index.js",
+  "main": "./lib/legacy/index.js",
   "types": "./lib/index.d.js",
-  "module": "./lib/legacy/index.js",
+  "module": "./lib/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/codastic/react-positioning-portal.git"

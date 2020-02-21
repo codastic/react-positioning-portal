@@ -3,11 +3,19 @@
   "version": "0.0.0",
   "description": "",
   "scripts": {
-    "test": ""
+    "build": "run-s build:*",
+    "build:clean": "rm -rf lib",
+    "build:esm": "tsc -m es6",
+    "test": "run-s test:*",
+    "test:lint": "tslint -c tslint.json 'src/**/*.ts'",
+    "test:prettier": "prettier --config -l .prettierrc \"{src}/**/*.{ts,tsx}\"",
+    "fix": "run-s fix:*",
+    "fix:lint": "tslint --fix -c tslint.json 'src/**/*.ts'",
+    "fix:prettier": "prettier --config -l --write .prettierrc \"{src}/**/*.{ts,tsx}\""
   },
-  "main": "./lib/index.js",
+  "main": "./lib/legacy/index.js",
   "types": "./lib/index.d.js",
-  "module": "./lib/legacy/index.js",
+  "module": "./lib/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/codastic/react-positioning-portal.git"
@@ -27,5 +35,13 @@
   },
   "homepage": "https://github.com/codastic/react-positioning-portal#readme",
   "dependencies": {},
-  "devDependencies": {}
+  "devDependencies": {
+    "npm-run-all": "^4.1.5",
+    "prettier": "^1.19.1",
+    "tslint": "^6.0.0",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-plugin-prettier": "^2.1.0",
+    "tslint-react": "^4.2.0",
+    "typescript": "^3.8.2"
+  }
 }

@@ -11,7 +11,8 @@
     "test:prettier": "prettier --config -l .prettierrc \"{src}/**/*.{ts,tsx}\"",
     "fix": "run-s fix:*",
     "fix:lint": "tslint --fix -c tslint.json 'src/**/*.ts'",
-    "fix:prettier": "prettier --config -l --write .prettierrc \"{src}/**/*.{ts,tsx}\""
+    "fix:prettier": "prettier --config -l --write .prettierrc \"{src}/**/*.{ts,tsx}\"",
+    "start": "start-storybook"
   },
   "main": "./lib/legacy/index.js",
   "types": "./lib/index.d.js",
@@ -35,9 +36,20 @@
   },
   "homepage": "https://github.com/codastic/react-positioning-portal#readme",
   "dependencies": {},
+  "peerDependencies": {
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
+  },
   "devDependencies": {
+    "@babel/core": "^7.8.4",
+    "@storybook/addon-actions": "^5.3.13",
+    "@storybook/addon-knobs": "^5.3.13",
+    "@storybook/addon-storysource": "^5.3.13",
+    "@storybook/react": "^5.3.13",
+    "babel-loader": "^8.0.6",
     "npm-run-all": "^4.1.5",
     "prettier": "^1.19.1",
+    "ts-loader": "^6.2.1",
     "tslint": "^6.0.0",
     "tslint-config-prettier": "^1.18.0",
     "tslint-plugin-prettier": "^2.1.0",

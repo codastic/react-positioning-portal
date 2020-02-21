@@ -1,0 +1,31 @@
+{
+  "name": "@codastic/react-positioning-portal",
+  "version": "0.0.0",
+  "description": "",
+  "scripts": {
+    "test": ""
+  },
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.js",
+  "module": "./lib/legacy/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codastic/react-positioning-portal.git"
+  },
+  "author": "Codastic <info@codastic.com>",
+  "contributors": [
+    "Mario Volke <mv@codastic.com>",
+    "Christian Ranz <cr@codastic.com>"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/codastic/react-positioning-portal/issues"
+  },
+  "engines": {
+    "node": ">=12.0.0",
+    "npm": ">=6.0.0"
+  },
+  "homepage": "https://github.com/codastic/react-positioning-portal#readme",
+  "dependencies": {},
+  "devDependencies": {}
+}

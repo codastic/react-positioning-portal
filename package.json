@@ -5,11 +5,15 @@
   "scripts": {
     "build": "run-s build:*",
     "build:clean": "rm -rf lib",
-    "build:esm": "tsc -m es6",
+    "build:esm": "rollup -c rollup.config.js",
     "test": "run-s test:*",
     "test:lint": "eslint ./ --ext .js,.jsx,.ts,.tsx",
     "fix": "npm run test:lint -- --fix",
-    "start": "start-storybook"
+    "start": "start-storybook",
+    "changes": "update-changelog --dry-run --link-commit https://github.com/codastic/react-positioning-portal/commit/:commit .",
+    "prerelease": "npm run -s test && update-changelog --link-commit https://github.com/codastic/react-positioning-portal/commit/:commit .",
+    "release": "release .",
+    "postrelease": "npm publish . --access public"
   },
   "main": "./lib/legacy/index.js",
   "types": "./lib/index.d.js",
@@ -39,6 +43,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",
+    "@codastic/release": "^1.8.0",
     "@dump247/storybook-state": "^1.6.1",
     "@storybook/addon-actions": "^5.3.13",
     "@storybook/addon-storysource": "^5.3.13",
@@ -57,7 +62,9 @@
     "prettier": "^1.19.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "rollup": "^2.1.0",
+    "rollup-plugin-typescript2": "^0.26.0",
     "ts-loader": "^6.2.1",
-    "typescript": "^3.8.2"
+    "typescript": "^3.8.3"
   }
 }

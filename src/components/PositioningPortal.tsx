@@ -52,8 +52,8 @@ const renderProps: <Strategy>(
 
 const defaultPositionStrategy: PositioningStrategy<Position> = (
   parentRect: ClientRect,
-  portalRect: ClientRect,
-  props: Props<Position>
+  portalRect: ClientRect
+  /* props: Props<Position> */
 ) => {
   // Open the content portal above the child if there is not enough space to the bottom,
   // but if there also isn't enough space at the top, open to the bottom.

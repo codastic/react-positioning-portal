@@ -13,6 +13,7 @@ export interface Props<Strategy> {
   onOpen?: () => void;
   onShouldClose?: () => void;
   closeOnOutsideClick?: boolean;
+  closeOnKeyDown?: (event: KeyboardEvent) => boolean;
   isOpen?: boolean;
   positionStrategy?: PositioningStrategy<Strategy>;
   rootNode?: HTMLElement;
@@ -21,6 +22,7 @@ export interface Props<Strategy> {
 export interface PortalContentRenderProps<Strategy> {
   close: () => void;
   isOpen: boolean;
+  isPositioned: boolean;
   strategy: Strategy;
   relatedWidth: number;
   transitionStarted: () => void;
@@ -110,6 +112,10 @@ interface State<Strategy> {
   strategy?: Strategy;
 }
 
+const KEYCODES = {
+  ESCAPE: 27
+};
+
 class PositioningPortal<Strategy = Position> extends React.Component<
   Props<Strategy>,
   State<Strategy>
@@ -119,6 +125,7 @@ class PositioningPortal<Strategy = Position> extends React.Component<
     onOpen: noop,
     onShouldClose: noop,
     closeOnOutsideClick: true,
+    closeOnKeyDown: (event: KeyboardEvent) => event.keyCode === KEYCODES.ESCAPE,
     positionStrategy: defaultPositionStrategy
   };
 
@@ -137,6 +144,7 @@ class PositioningPortal<Strategy = Position> extends React.Component<
   private portalRef = React.createRef<HTMLDivElement>();
 
   public componentDidMount() {
+    window.document.addEventListener('keydown', this.handleKeydown, false);
     window.document.addEventListener(
       'click',
       this.handleOutsideMouseClick,
@@ -159,6 +167,7 @@ class PositioningPortal<Strategy = Position> extends React.Component<
   }
 
   public componentWillUnmount() {
+    window.document.removeEventListener('keydown', this.handleKeydown, false);
     window.document.removeEventListener(
       'click',
       this.handleOutsideMouseClick,
@@ -207,6 +216,16 @@ class PositioningPortal<Strategy = Position> extends React.Component<
     }
 
     this.close();
+  };
+
+  private handleKeydown = (event: KeyboardEvent) => {
+    if (
+      this.state.isOpen &&
+      this.props.closeOnKeyDown &&
+      this.props.closeOnKeyDown(event)
+    ) {
+      this.close();
+    }
   };
 
   private onOpen = () => {
@@ -348,6 +367,7 @@ class PositioningPortal<Strategy = Position> extends React.Component<
             transitionEnded: this.transitionEnded,
             strategy,
             isOpen,
+            isPositioned,
             relatedWidth
           })
         ),

@@ -3,13 +3,11 @@ import { action } from '@storybook/addon-actions';
 
 import Button from '../storybook/Button';
 import Flyout from '../storybook/Flyout';
-import { globalStyleDecorator } from '../storybook/decorators';
 
 import PositioningPortalWithState from './PositioningPortalWithState';
 
 export default {
-  title: 'PositioningPortalWithState',
-  decorators: [globalStyleDecorator]
+  title: 'PositioningPortalWithState'
 };
 
 export const base = () => (

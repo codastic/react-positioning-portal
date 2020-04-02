@@ -5,7 +5,6 @@ import { withState, Store } from '@dump247/storybook-state';
 
 import Button from '../storybook/Button';
 import { COLORS } from '../storybook/styles';
-import { globalStyleDecorator } from '../storybook/decorators';
 
 import PositioningPortal, { PositioningStrategy } from './PositioningPortal';
 
@@ -240,11 +239,38 @@ const positionStrategy: (
 };
 
 export default {
-  title: 'Example: Tooltip',
-  decorators: [globalStyleDecorator]
+  title: 'Example: Tooltip'
 };
 
 export const base = withState(
+  { isOpen: false },
+  (store: Store<{ isOpen: boolean }>) => (
+    <PositioningPortal
+      positionStrategy={positionStrategy(POSITION.RIGHT)}
+      isOpen={store.state.isOpen}
+      onOpen={action('onOpen')}
+      onShouldClose={() => store.set({ isOpen: false })}
+      portalContent={({ strategy }) => (
+        <Tooltip
+          position={strategy ? strategy.position : undefined}
+          shift={strategy ? strategy.shift : undefined}
+        >
+          Tooltip positioned with portal.
+        </Tooltip>
+      )}
+    >
+      <Button
+        type="button"
+        onMouseEnter={() => store.set({ isOpen: true })}
+        onMouseLeave={() => store.set({ isOpen: false })}
+      >
+        Open Tooltip
+      </Button>
+    </PositioningPortal>
+  )
+);
+
+export const scrollableTest = withState(
   { isOpen: false },
   (store: Store<{ isOpen: boolean }>) => (
     <div style={{ margin: '95vh 95vw', display: 'inline-block' }}>

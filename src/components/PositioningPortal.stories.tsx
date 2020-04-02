@@ -5,13 +5,11 @@ import { Transition } from 'react-transition-group';
 
 import Button from '../storybook/Button';
 import Flyout from '../storybook/Flyout';
-import { globalStyleDecorator } from '../storybook/decorators';
 
 import PositioningPortal from './PositioningPortal';
 
 export default {
-  title: 'PositioningPortal',
-  decorators: [globalStyleDecorator]
+  title: 'PositioningPortal'
 };
 
 const baseStory = (store: Store<{ isOpen: boolean }>) => (

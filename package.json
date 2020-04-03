@@ -1,19 +1,19 @@
 {
   "name": "@codastic/react-positioning-portal",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "The positioning portal is a low level React component to build all kinds of absolutely positioned flyouts which are anchored to another element in the viewport. This can be used to create dropdowns, tooltips, context menus, etc.",
   "scripts": {
+    "start": "start-storybook -p 3000",
     "build": "run-s build:*",
-    "build:clean": "rm -rf lib",
+    "build:clean": "rm -rf lib && rm -rf docs",
     "build:esm": "rollup -c rollup.config.js",
+    "build:storybook": "build-storybook -o docs",
     "test": "run-s test:*",
     "test:lint": "eslint ./ --ext .js,.jsx,.ts,.tsx",
     "fix": "npm run test:lint -- --fix",
-    "start": "start-storybook -p 3000",
     "changes": "update-changelog --dry-run --link-commit https://github.com/codastic/react-positioning-portal/commit/:commit .",
     "prerelease": "npm run -s test && update-changelog --link-commit https://github.com/codastic/react-positioning-portal/commit/:commit .",
-    "release": "release .",
-    "postrelease": "npm publish . --access public"
+    "release": "release . --build-command='npm run build && git add --force lib docs'"
   },
   "main": "./lib/legacy/index.js",
   "types": "./lib/index.d.js",

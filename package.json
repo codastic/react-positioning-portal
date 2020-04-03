@@ -1,6 +1,6 @@
 {
   "name": "@codastic/react-positioning-portal",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "",
   "scripts": {
     "start": "start-storybook -p 3000",
@@ -13,8 +13,7 @@
     "fix": "npm run test:lint -- --fix",
     "changes": "update-changelog --dry-run --link-commit https://github.com/codastic/react-positioning-portal/commit/:commit .",
     "prerelease": "npm run -s test && update-changelog --link-commit https://github.com/codastic/react-positioning-portal/commit/:commit .",
-    "release": "release . --build-command='npm run build && git add --force lib docs'",
-    "postrelease": "npm publish . --access public"
+    "release": "release . --build-command='npm run build && git add --force lib docs'"
   },
   "main": "./lib/legacy/index.js",
   "types": "./lib/index.d.js",

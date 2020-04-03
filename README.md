@@ -82,7 +82,7 @@ Basic usage of `<PositioningPortalWithState />` which handles state inside.
 - Handles key down to close the portal.
 - Customizable react portal root.
 - Portal transitions when opening and closing.
-- Defines custom root node for the portal.
+- Define a custom root node for the portal.
 
 ### `<PositioningPortalWithState />`
 

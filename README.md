@@ -7,7 +7,7 @@ The positioning portal is a low level React component to build all kinds of
 absolutely positioned flyouts which are anchored to another element in the viewport.
 This can be used to create dropdowns, tooltips, context menus, etc.
 
-The positioning portal is build as unopinionated as possible which means it creates only mininmal DOM
+The positioning portal is build as unopinionated as possible which means, it creates only mininmal DOM
 and does not have any dependencies to special styling libraries. It only uses some inline styles on the portal for positioning.
 
 How the portal is positioned in relation to its anchor in the DOM is defined by a *positioning strategy*.
@@ -82,7 +82,7 @@ Basic usage of `<PositioningPortalWithState />` which handles state inside.
 - Handles key down to close the portal.
 - Customizable react portal root.
 - Portal transitions when opening and closing.
-- Define custom root node for the portal.
+- Defines custom root node for the portal.
 
 ### `<PositioningPortalWithState />`
 
@@ -96,7 +96,7 @@ it can be easier to use `<PositioningPortalWithState />` and let it handle the s
 
 - `children: React.ReactNode`:
 
-  The PositioningPortal component takes the portals anchor element as children. Its `width` is passed to the `portalContent` render prop argument `relatedWidth`.
+  The PositioningPortal component takes the portal's anchor element as children. Its `width` is passed to the `portalContent` render prop argument `relatedWidth`.
 
 - `portalElement?: React.ReactElement`: (default: `<div />`)
 
@@ -137,7 +137,7 @@ it can be easier to use `<PositioningPortalWithState />` and let it handle the s
 
 - `onShouldClose?: () => void`:
 
-  Called if `PortalContentRenderProps.close` gets called, by clicking outside the portal content (in case `closeOnOutsideClick` is true) or if `closeOnKeyDown` returns true.
+  This gets called if `PortalContentRenderProps.close` gets called, by clicking outside the portal content (in case `closeOnOutsideClick` is true) or if `closeOnKeyDown` returns true.
 
 - `closeOnOutsideClick?: boolean`: (default: `true`)
 
@@ -145,7 +145,7 @@ it can be easier to use `<PositioningPortalWithState />` and let it handle the s
 
 - `closeOnKeyDown?: (event: KeyboardEvent) => boolean`: (default: `event => event.keyCode === 27`, close on ESC)
 
-  A function called on `keydown`. If it returns `true`, the handler passed to `onShouldClose` will be called.
+  A function, which will be called on `keydown`. If it returns `true`, the handler passed to `onShouldClose` will be called.
 
 - `isOpen?: boolean`:
 
@@ -153,7 +153,7 @@ it can be easier to use `<PositioningPortalWithState />` and let it handle the s
 
 - `positionStrategy?: PositioningStrategy<Strategy>`:
 
-  Set a custom PositioningStrategy. For details see the PositioningStrategy section.
+  Sets a custom PositioningStrategy. For details see the PositioningStrategy section.
 
 - `rootNode?: HTMLElement`:
 
@@ -165,7 +165,7 @@ Extends properties of `<PositioningPortal />` and adds/changes the folling prope
 
 - `children: React.ReactNode | ((params: RenderProps) => React.ReactNode)`:
 
-  Since state is handled inside of the component its possible to render the children via a render function and to receive the following render props:
+  Since state is handled inside of the component, it's possible to render the children via a render function and to receive the following render props:
   ```
   interface RenderProps {
     close: () => void;

@@ -16,6 +16,7 @@ const baseStory = (store: Store<{ isOpen: boolean }>) => (
   <PositioningPortal
     isOpen={store.state.isOpen}
     onOpen={action('onOpen')}
+    onClose={action('onClose')}
     onShouldClose={() => store.set({ isOpen: false })}
     portalContent={
       <Flyout>
@@ -46,6 +47,7 @@ export const withAnimation = withState(
     <PositioningPortal
       isOpen={store.state.isOpen}
       onOpen={action('onOpen')}
+      onClose={action('onClose')}
       onShouldClose={() => store.set({ isOpen: false })}
       portalContent={({
         isOpen,
@@ -88,6 +90,7 @@ export const sameWidthAsParent = withState(
     <PositioningPortal
       isOpen={store.state.isOpen}
       onOpen={action('onOpen')}
+      onClose={action('onClose')}
       onShouldClose={() => store.set({ isOpen: false })}
       portalContent={({ relatedWidth }) => (
         <Flyout relatedWidth={relatedWidth}>
@@ -112,6 +115,7 @@ export const noClickOutsideClose = withState(
       closeOnOutsideClick={false}
       isOpen={store.state.isOpen}
       onOpen={action('onOpen')}
+      onClose={action('onClose')}
       onShouldClose={() => store.set({ isOpen: false })}
       portalContent={
         <Flyout>
@@ -129,13 +133,14 @@ export const noClickOutsideClose = withState(
   )
 );
 
-export const closeOnKeydownEnter = withState(
+export const closeOnKeydownQ = withState(
   { isOpen: false },
   (store: Store<{ isOpen: boolean }>) => (
     <PositioningPortal
-      closeOnKeyDown={(event: KeyboardEvent) => event.keyCode === 13}
+      closeOnKeyDown={(event: KeyboardEvent) => event.keyCode === 81}
       isOpen={store.state.isOpen}
       onOpen={action('onOpen')}
+      onClose={action('onClose')}
       onShouldClose={() => store.set({ isOpen: false })}
       portalContent={
         <Flyout>

@@ -14,8 +14,6 @@ export interface RenderProps {
 export interface Props<Strategy = Position>
   extends PositioningPortalProps<Strategy> {
   children: React.ReactNode | ((params: RenderProps) => React.ReactNode);
-  onClose?: () => void;
-  onOpen?: () => void;
 }
 
 const renderProps: <Strategy>(
@@ -32,16 +30,14 @@ const PositioningPortalWithState: PositioningPortalWithState = (
   props: Props
 ) => {
   const [isOpen, setIsOpen] = React.useState<boolean>(false);
-  const { onClose, onOpen, children, ...restProps } = props;
+  const { children, ...restProps } = props;
 
   const open = () => {
     setIsOpen(true);
-    onOpen();
   };
 
   const close = () => {
     setIsOpen(false);
-    onClose();
   };
 
   return (

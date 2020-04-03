@@ -11,6 +11,7 @@ export interface Props<Strategy> {
     | React.ReactNode
     | ((params: PortalContentRenderProps<Strategy>) => React.ReactNode);
   onOpen?: () => void;
+  onClose?: () => void;
   onShouldClose?: () => void;
   closeOnOutsideClick?: boolean;
   closeOnKeyDown?: (event: KeyboardEvent) => boolean;
@@ -123,6 +124,7 @@ class PositioningPortal<Strategy = Position> extends React.Component<
   public static defaultProps = {
     isOpen: false,
     onOpen: noop,
+    onClose: noop,
     onShouldClose: noop,
     closeOnOutsideClick: true,
     closeOnKeyDown: (event: KeyboardEvent) => event.keyCode === KEYCODES.ESCAPE,
@@ -255,6 +257,8 @@ class PositioningPortal<Strategy = Position> extends React.Component<
       isOpen: false,
       scrollParents: []
     });
+
+    this.props.onClose();
   };
 
   private preRenderPortal = () =>

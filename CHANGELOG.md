@@ -1,4 +1,8 @@
 
+### v0.2.0 / 2020-04-10 08:07:17
+
+- Add docs to readme and minor changes of the api (i: Mario Volke, c: [23a331b](https://github.com/codastic/react-positioning-portal/commit/23a331b))
+
 ### v0.1.0 / 2020-04-03 07:55:23
 
 - Ignore docs build for linting (i: Mario Volke, r: Christian Ranz, c: [8ea7630](https://github.com/codastic/react-positioning-portal/commit/8ea7630))

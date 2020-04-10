@@ -8,9 +8,9 @@ absolutely positioned flyouts which are anchored to another element in the viewp
 This can be used to create dropdowns, tooltips, context menus, etc.
 
 The positioning portal is build as unopinionated as possible which means, it creates only mininmal DOM
-and does not have any dependencies to special styling libraries. It only uses some inline styles on the portal for positioning.
+and does not have any dependencies to specific styling libraries. It only uses some inline styles on the portal for positioning.
 
-How the portal is positioned in relation to its anchor in the DOM is defined by a *positioning strategy*.
+How the portal is positioned in relation to its anchor in the DOM is defined by a _positioning strategy_.
 The default positioning strategy should be enough for a lot of use cases. It either positions the portal above
 (left or right aligned) to the anchor or below depending on the available space in the current viewport.
 This default strategy is perfectly suited to build e.g. custom dropdowns.
@@ -80,7 +80,6 @@ Basic usage of `<PositioningPortalWithState />` which handles state inside.
 - State handled outside the PositioningPortal.
 - Handles outside click to close the portal.
 - Handles key down to close the portal.
-- Customizable react portal root.
 - Portal transitions when opening and closing.
 - Define a custom root node for the portal.
 
@@ -88,7 +87,7 @@ Basic usage of `<PositioningPortalWithState />` which handles state inside.
 
 This component is almost feature equivalent to `<PositioningPortal />` with the exception that
 the `isOpen` state is already handled by the component itself. So if you don't have to control this state outside
-it can be easier to use `<PositioningPortalWithState />` and let it handle the state.
+it can be easier to use `<PositioningPortalWithState />` and let it handle the state itself.
 
 ## API Reference
 
@@ -115,6 +114,7 @@ it can be easier to use `<PositioningPortalWithState />` and let it handle the s
 
   Actual content rendered when the portal is open. `portalContent` can be any react node or a function
   returning a react node. The function receives the following props:
+
   ```
   interface PortalContentRenderProps<Strategy> {
     close: () => void; // Basically calls the handler passed to onShouldClose
@@ -165,7 +165,8 @@ Extends properties of `<PositioningPortal />` and adds/changes the folling prope
 
 - `children: React.ReactNode | ((params: RenderProps) => React.ReactNode)`:
 
-  Since state is handled inside of the component, it's possible to render the children via a render function and to receive the following render props:
+  Since state is handled inside of the component, it is possible to render the children via a render function and to receive the following render props:
+
   ```
   interface RenderProps {
     close: () => void;

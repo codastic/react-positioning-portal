@@ -13,7 +13,8 @@
     "fix": "npm run test:lint -- --fix",
     "changes": "update-changelog --dry-run --link-commit https://github.com/codastic/react-positioning-portal/commit/:commit .",
     "prerelease": "npm run -s test && update-changelog --link-commit https://github.com/codastic/react-positioning-portal/commit/:commit .",
-    "release": "release . --build-command='npm run build && git add --force lib docs'"
+    "release": "release . --build-command='npm run build && git add --force lib docs'",
+    "postrelease": "npm publish . --access public"
   },
   "main": "./lib/legacy/index.js",
   "types": "./lib/index.d.js",

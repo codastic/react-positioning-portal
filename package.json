@@ -1,6 +1,6 @@
 {
   "name": "@codastic/react-positioning-portal",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "The positioning portal is a low level React component to build all kinds of absolutely positioned flyouts which are anchored to another element in the viewport. This can be used to create dropdowns, tooltips, context menus, etc.",
   "scripts": {
     "start": "start-storybook -p 3000",

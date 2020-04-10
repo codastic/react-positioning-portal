@@ -7,4 +7,4 @@ export declare const scrollableTest: any;
 export declare const withAnimation: any;
 export declare const sameWidthAsParent: any;
 export declare const noClickOutsideClose: any;
-export declare const closeOnKeydownEnter: any;
+export declare const closeOnKeydownQ: any;

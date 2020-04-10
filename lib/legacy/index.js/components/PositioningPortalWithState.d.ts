@@ -7,8 +7,6 @@ export interface RenderProps {
 }
 export interface Props<Strategy = Position> extends PositioningPortalProps<Strategy> {
     children: React.ReactNode | ((params: RenderProps) => React.ReactNode);
-    onClose?: () => void;
-    onOpen?: () => void;
 }
 declare type PositioningPortalWithState<Strategy = Position> = React.StatelessComponent<Props<Strategy>>;
 declare const PositioningPortalWithState: PositioningPortalWithState;

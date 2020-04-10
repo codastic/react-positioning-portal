@@ -4,6 +4,7 @@ export interface Props<Strategy> {
     portalElement?: React.ReactElement;
     portalContent: React.ReactNode | ((params: PortalContentRenderProps<Strategy>) => React.ReactNode);
     onOpen?: () => void;
+    onClose?: () => void;
     onShouldClose?: () => void;
     closeOnOutsideClick?: boolean;
     closeOnKeyDown?: (event: KeyboardEvent) => boolean;
@@ -46,6 +47,7 @@ declare class PositioningPortal<Strategy = Position> extends React.Component<Pro
     static defaultProps: {
         isOpen: boolean;
         onOpen: () => void;
+        onClose: () => void;
         onShouldClose: () => void;
         closeOnOutsideClick: boolean;
         closeOnKeyDown: (event: KeyboardEvent) => boolean;

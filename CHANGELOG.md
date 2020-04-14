@@ -1,4 +1,9 @@
 
+### v0.2.1 / 2020-04-14 07:15:37
+
+- Use explicit publish files in package.json (i: Mario Volke, r: Christian Ranz, c: [2abf30b](https://github.com/codastic/react-positioning-portal/commit/2abf30b))
+- Add publish script (i: Mario Volke, r: Christian Ranz, c: [c6d2600](https://github.com/codastic/react-positioning-portal/commit/c6d2600))
+
 ### v0.2.0 / 2020-04-10 08:07:17
 
 - Add docs to readme and minor changes of the api (i: Mario Volke, c: [23a331b](https://github.com/codastic/react-positioning-portal/commit/23a331b))

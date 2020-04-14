@@ -19,6 +19,10 @@
   "main": "./lib/legacy/index.js",
   "types": "./lib/index.d.js",
   "module": "./lib/index.js",
+  "files": [
+    "/lib",
+    "/src"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/codastic/react-positioning-portal.git"

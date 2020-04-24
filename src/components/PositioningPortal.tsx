@@ -109,6 +109,7 @@ interface State<Strategy> {
   isPositioned: boolean;
   isOpen: boolean;
   transitionActive: boolean;
+  shouldRender: boolean;
   scrollParents: HTMLElement[];
   strategy?: Strategy;
 }
@@ -139,6 +140,7 @@ class PositioningPortal<Strategy = Position> extends React.Component<
     isPositioned: false,
     isOpen: false,
     transitionActive: false,
+    shouldRender: false,
     scrollParents: [],
     strategy: null
   };
@@ -152,6 +154,9 @@ class PositioningPortal<Strategy = Position> extends React.Component<
       this.handleOutsideMouseClick,
       false
     );
+
+    // Do not render on server side.
+    this.setState({ shouldRender: true });
 
     if (this.props.isOpen) {
       this.onOpen();
@@ -328,12 +333,7 @@ class PositioningPortal<Strategy = Position> extends React.Component<
     });
 
   public render() {
-    const {
-      children,
-      portalContent,
-      portalElement,
-      rootNode = document.body
-    } = this.props;
+    const { children, portalContent, portalElement, rootNode } = this.props;
     const {
       top,
       left,
@@ -342,7 +342,8 @@ class PositioningPortal<Strategy = Position> extends React.Component<
       isPositioned,
       isOpen,
       strategy,
-      transitionActive
+      transitionActive,
+      shouldRender
     } = this.state;
     const relatedWidth = parentRect ? parentRect.width : 0;
 
@@ -375,13 +376,15 @@ class PositioningPortal<Strategy = Position> extends React.Component<
             relatedWidth
           })
         ),
-        rootNode
+        rootNode || window.document.body
       );
+
+    const shouldRenderPortal = shouldRender && (isOpen || transitionActive);
 
     return (
       <>
         {children}
-        {(isOpen || transitionActive) && renderPortal()}
+        {shouldRenderPortal && renderPortal()}
       </>
     );
   }

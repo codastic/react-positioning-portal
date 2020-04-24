@@ -1,4 +1,8 @@
 
+### v0.3.1 / 2020-04-24 12:17:37
+
+- Add build check before releasing (i: Mario Volke, r: Christian Ranz, c: [f27a2fe](https://github.com/codastic/react-positioning-portal/commit/f27a2fe))
+
 ### v0.3.0 / 2020-04-24 11:51:42
 
 - Fix returned strategy from defaultPositionStrategy (i: Korbinian Fritsch, r: Mario Volke, c: [76a1c8d](https://github.com/codastic/react-positioning-portal/commit/76a1c8d))

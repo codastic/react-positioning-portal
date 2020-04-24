@@ -31,9 +31,12 @@ $ npm install @codastic/react-positioning-portal react react-dom --save
 Basic usage of `<PositioningPortal />` where state is handled outside.
 
 ```
-const [isPortalOpen, setIsPortalOpen] = useState(false);
+import { useState } from 'react';
+import { PositioningPortal } from '@codastic/react-positioning-portal';
 
-//…
+// ...
+
+const [isPortalOpen, setIsPortalOpen] = useState(false);
 
 <PositioningPortal
   isOpen={isPortalOpen}
@@ -57,6 +60,10 @@ const [isPortalOpen, setIsPortalOpen] = useState(false);
 Basic usage of `<PositioningPortalWithState />` which handles state inside.
 
 ```
+import { PositioningPortalWithState } from '@codastic/react-positioning-portal';
+
+// ...
+
 <PositioningPortalWithState
   portalContent={
     <div>

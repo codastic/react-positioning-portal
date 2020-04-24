@@ -40,6 +40,7 @@ interface State<Strategy> {
     isPositioned: boolean;
     isOpen: boolean;
     transitionActive: boolean;
+    shouldRender: boolean;
     scrollParents: HTMLElement[];
     strategy?: Strategy;
 }

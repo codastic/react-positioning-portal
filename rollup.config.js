@@ -1,17 +1,43 @@
-const typescript = require('rollup-plugin-typescript2');
+import commonjs from 'rollup-plugin-commonjs';
+import resolve from 'rollup-plugin-node-resolve';
+import babel from 'rollup-plugin-babel';
+import pkg from './package.json';
 
-const pkg = require('./package.json');
+const extensions = [
+  '.js', '.jsx', '.ts', '.tsx',
+];
+
+const name = 'RollupTypeScriptBabel';
 
 export default {
-  input: 'src/index.ts',
-  external: Object.keys(pkg.peerDependencies),
+  input: './src/index.ts',
+
+  // Specify here external modules which you don't want to include in your bundle (for instance: 'lodash', 'moment' etc.)
+  // https://rollupjs.org/guide/en#external-e-external
+  external: [],
+
+  plugins: [
+    // Allows node_modules resolution
+    resolve({ extensions }),
+
+    // Allow bundling cjs modules. Rollup doesn't understand cjs
+    commonjs({
+      include: 'node_modules/**',
+      namedExports: {
+        'node_modules/react/index.js': ['Component', 'PureComponent', 'Fragment', 'Children', 'createElement', 'createRef', 'cloneElement', 'useState'],
+        'node_modules/react-dom/index.js': ['findDOMNode', 'createPortal']
+      }
+    }),
+
+    // Compile TypeScript/JavaScript files
+    babel({ extensions, include: ['src/**/*'] }),
+  ],
+
   output: [{
-    dir: pkg.main,
-    format: 'cjs'
-  },
-  {
+    file: pkg.main,
+    format: 'cjs',
+  }, {
     file: pkg.module,
-    format: 'es'
+    format: 'es',
   }],
-  plugins: [typescript()],
 };

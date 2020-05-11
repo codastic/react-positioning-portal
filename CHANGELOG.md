@@ -1,4 +1,8 @@
 
+### v0.3.2 / 2020-05-11 12:13:44
+
+- Change ts build target to es5 to increase compatibility (i: Chris Ranz, r: Mario Volke, c: [3f744b5](https://github.com/codastic/react-positioning-portal/commit/3f744b5))
+
 ### v0.3.1 / 2020-04-24 12:17:37
 
 - Add build check before releasing (i: Mario Volke, r: Christian Ranz, c: [f27a2fe](https://github.com/codastic/react-positioning-portal/commit/f27a2fe))

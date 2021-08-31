@@ -110,7 +110,7 @@ interface State<Strategy> {
   isOpen: boolean;
   transitionActive: boolean;
   shouldRender: boolean;
-  scrollParents: HTMLElement[];
+  scrollParents: Array<HTMLElement | Window>;
   strategy?: Strategy;
 }
 
@@ -291,7 +291,7 @@ class PositioningPortal<Strategy = Position> extends React.Component<
   };
 
   private preRenderPortal = () =>
-    new Promise(resolve => {
+    new Promise<void>(resolve => {
       // A tricky way to get the first child DOM element of the fragment of this component.
       // Unfortunately there seems to be no way to achieve this with refs.
       const parentDom = ReactDOM.findDOMNode(this);
@@ -326,7 +326,7 @@ class PositioningPortal<Strategy = Position> extends React.Component<
     });
 
   private finalRenderPortal = () =>
-    new Promise(resolve => {
+    new Promise<void>(resolve => {
       if (
         this.state.isOpen &&
         !this.state.isPositioned &&

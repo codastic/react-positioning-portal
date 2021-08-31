@@ -9,18 +9,6 @@ function isScrollParent(element: HTMLElement): boolean {
   }
 }
 
-export function getScrollParent(element: HTMLElement): HTMLElement {
-  if (!element || element.tagName === DEFAULT_SCROLL_PARENT) {
-    return window.document.body;
-  }
-
-  if (isScrollParent(element)) {
-    return element;
-  }
-
-  return getScrollParent(element.parentElement);
-}
-
 export default function getScrollParents(
   element: HTMLElement,
   scrollParents: Array<HTMLElement | Window> = []

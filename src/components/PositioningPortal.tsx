@@ -118,6 +118,8 @@ const KEYCODES = {
   ESCAPE: 27
 };
 
+const EVENT_CONTEXT_KEY = 'PositioningPortal-context';
+
 class PositioningPortal<Strategy = Position> extends React.Component<
   Props<Strategy>,
   State<Strategy>
@@ -201,7 +203,11 @@ class PositioningPortal<Strategy = Position> extends React.Component<
     this.setState({ transitionActive: false });
   };
 
-  private handleOutsideMouseClick = (event: MouseEvent) => {
+  private handleOutsideMouseClick = (
+    event: MouseEvent & {
+      [EVENT_CONTEXT_KEY]?: PositioningPortal<Strategy>[];
+    }
+  ) => {
     if (!this.props.closeOnOutsideClick) {
       return;
     }
@@ -214,6 +220,10 @@ class PositioningPortal<Strategy = Position> extends React.Component<
       this.portalRef.current &&
       this.portalRef.current.contains(event.target as Node)
     ) {
+      return;
+    }
+
+    if ((event[EVENT_CONTEXT_KEY] || []).includes(this)) {
       return;
     }
 
@@ -264,6 +274,20 @@ class PositioningPortal<Strategy = Position> extends React.Component<
     });
 
     this.props.onClose();
+  };
+
+  private markClickEvent = (
+    event: React.MouseEvent<
+      HTMLElement,
+      MouseEvent & {
+        [EVENT_CONTEXT_KEY]?: PositioningPortal<Strategy>[];
+      }
+    >
+  ) => {
+    event.nativeEvent[EVENT_CONTEXT_KEY] = [
+      ...(event.nativeEvent[EVENT_CONTEXT_KEY] || []),
+      this
+    ];
   };
 
   private preRenderPortal = () =>
@@ -364,7 +388,8 @@ class PositioningPortal<Strategy = Position> extends React.Component<
             style: {
               ...portalStyle,
               ...((portalElement && portalElement.props.style) || {})
-            }
+            },
+            onClick: this.markClickEvent
           },
           renderProps<Strategy>(portalContent, {
             close: this.close,

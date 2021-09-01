@@ -41,7 +41,7 @@ interface State<Strategy> {
     isOpen: boolean;
     transitionActive: boolean;
     shouldRender: boolean;
-    scrollParents: HTMLElement[];
+    scrollParents: Array<HTMLElement | Window>;
     strategy?: Strategy;
 }
 declare class PositioningPortal<Strategy = Position> extends React.Component<Props<Strategy>, State<Strategy>> {
@@ -66,6 +66,7 @@ declare class PositioningPortal<Strategy = Position> extends React.Component<Pro
     private handleKeydown;
     private onOpen;
     private onClose;
+    private markClickEvent;
     private preRenderPortal;
     private finalRenderPortal;
     render(): JSX.Element;

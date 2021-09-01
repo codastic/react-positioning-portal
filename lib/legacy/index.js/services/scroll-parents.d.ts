@@ -1,2 +1,1 @@
-export declare function getScrollParent(element: HTMLElement): HTMLElement;
-export default function getScrollParents(element: HTMLElement, scrollParents?: HTMLElement[]): HTMLElement[];
+export default function getScrollParents(element: HTMLElement, scrollParents?: Array<HTMLElement | Window>): Array<HTMLElement | Window>;

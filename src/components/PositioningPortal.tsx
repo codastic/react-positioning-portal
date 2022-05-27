@@ -26,6 +26,7 @@ export interface PortalContentRenderProps<Strategy> {
   isPositioned: boolean;
   strategy: Strategy;
   relatedWidth: number;
+  relatedHeight: number;
   transitionStarted: () => void;
   transitionEnded: () => void;
 }
@@ -370,6 +371,7 @@ class PositioningPortal<Strategy = Position> extends React.Component<
       shouldRender
     } = this.state;
     const relatedWidth = parentRect ? parentRect.width : 0;
+    const relatedHeight = parentRect ? parentRect.height : 0;
 
     const portalStyle = {
       position: 'absolute',
@@ -398,7 +400,8 @@ class PositioningPortal<Strategy = Position> extends React.Component<
             strategy,
             isOpen,
             isPositioned,
-            relatedWidth
+            relatedWidth,
+            relatedHeight
           })
         ),
         rootNode || window.document.body

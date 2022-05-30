@@ -18,6 +18,7 @@ export interface PortalContentRenderProps<Strategy> {
     isPositioned: boolean;
     strategy: Strategy;
     relatedWidth: number;
+    relatedHeight: number;
     transitionStarted: () => void;
     transitionEnded: () => void;
 }

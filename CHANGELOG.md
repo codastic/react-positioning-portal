@@ -1,4 +1,9 @@
 
+### v0.5.0 / 2022-05-30 06:39:05
+
+- Fix babel dependencies (i: Mario Volke, c: [10e94fa](https://github.com/codastic/react-positioning-portal/commit/10e94fa))
+- Add relatedHeight to portalContent render function props (i: Alexander Braunreuther, r: Mario Volke, c: [8e97727](https://github.com/codastic/react-positioning-portal/commit/8e97727))
+
 ### v0.4.0 / 2021-09-01 09:33:49
 
 - Fix root scroll parent handling on window (i: Mario Volke, r: Korbinian Fritsch, c: [f994082](https://github.com/codastic/react-positioning-portal/commit/f994082))

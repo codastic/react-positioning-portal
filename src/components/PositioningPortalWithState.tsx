@@ -2,7 +2,6 @@ import * as React from 'react';
 
 import PositioningPortal, {
   Props as PositioningPortalProps,
-  Position
 } from './PositioningPortal';
 
 export interface RenderProps {
@@ -11,24 +10,23 @@ export interface RenderProps {
   isOpen: boolean;
 }
 
-export interface Props<Strategy = Position>
-  extends PositioningPortalProps<Strategy> {
+export interface Props<Strategy>
+  extends Omit<PositioningPortalProps<Strategy>, 'children' | 'isOpen'> {
   children: React.ReactNode | ((params: RenderProps) => React.ReactNode);
 }
 
-const renderProps: <Strategy>(
+function renderProps<Strategy>(
   element: Props<Strategy>['children'],
   props: RenderProps
-) => React.ReactNode = (element, props) =>
-  typeof element === 'function' ? element(props) : element;
+): React.ReactNode {
+  return typeof element === 'function' ? element(props) : element;
+}
 
-type PositioningPortalWithState<Strategy = Position> = React.StatelessComponent<
+type PositioningPortalWithState<Strategy> = React.FunctionComponent<
   Props<Strategy>
 >;
 
-const PositioningPortalWithState: PositioningPortalWithState = (
-  props: Props
-) => {
+function PositioningPortalWithState<Strategy>(props: Props<Strategy>) {
   const [isOpen, setIsOpen] = React.useState<boolean>(false);
   const { children, ...restProps } = props;
 
@@ -45,10 +43,10 @@ const PositioningPortalWithState: PositioningPortalWithState = (
       {renderProps(children, {
         open,
         close,
-        isOpen
+        isOpen,
       })}
     </PositioningPortal>
   );
-};
+}
 
 export default PositioningPortalWithState;

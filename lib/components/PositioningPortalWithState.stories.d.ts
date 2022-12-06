@@ -1,30 +1,6 @@
-declare const _default: {
-    parameters: {
-        storySource: {
-            source: string;
-            locationsMap: {
-                "positioningportalwithstate--base": {
-                    startLoc: {
-                        col: number;
-                        line: number;
-                    };
-                    endLoc: {
-                        col: number;
-                        line: number;
-                    };
-                    startBody: {
-                        col: number;
-                        line: number;
-                    };
-                    endBody: {
-                        col: number;
-                        line: number;
-                    };
-                };
-            };
-        };
-    };
-    title: string;
-};
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Position } from './PositioningPortal';
+import PositioningPortalWithState from './PositioningPortalWithState';
+declare const _default: ComponentMeta<typeof PositioningPortalWithState>;
 export default _default;
-export declare const base: any;
+export declare const Base: ComponentStory<PositioningPortalWithState<Position>>;

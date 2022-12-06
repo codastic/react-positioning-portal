@@ -1,10 +1,10 @@
-declare const _default: {
-    title: string;
-};
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+import PositioningPortal from './PositioningPortal';
+declare const _default: ComponentMeta<typeof PositioningPortal>;
 export default _default;
-export declare const base: any;
-export declare const scrollableTest: any;
-export declare const withAnimation: any;
-export declare const sameWidthAsParent: any;
-export declare const noClickOutsideClose: any;
-export declare const closeOnKeydownQ: any;
+export declare const Base: ComponentStory<typeof PositioningPortal>;
+export declare const ScrollableTest: any;
+export declare const WithAnimation: any;
+export declare const SameWidthAsParent: any;
+export declare const NoClickOutsideClose: any;
+export declare const CloseOnKeydownQ: any;

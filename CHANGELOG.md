@@ -1,4 +1,8 @@
 
+### v0.6.0 / 2022-12-06 12:19:23
+
+- Add support for React 18 and update dependencies and storybook (i: Mario Volke, r: Christian Ranz, c: [d6976e5](https://github.com/codastic/react-positioning-portal/commit/d6976e5))
+
 ### v0.5.0 / 2022-05-30 06:39:05
 
 - Fix babel dependencies (i: Mario Volke, c: [10e94fa](https://github.com/codastic/react-positioning-portal/commit/10e94fa))

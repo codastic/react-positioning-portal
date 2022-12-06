@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 export interface Props<Strategy> {
     children: React.ReactNode;
     portalElement?: React.ReactElement;
@@ -22,7 +22,7 @@ export interface PortalContentRenderProps<Strategy> {
     transitionStarted: () => void;
     transitionEnded: () => void;
 }
-export declare type PositioningStrategy<Strategy> = (parentRect: ClientRect, portalRect: ClientRect, props: Props<Strategy>) => {
+export type PositioningStrategy<Strategy> = (parentRect: ClientRect, portalRect: ClientRect, props: Props<Strategy>) => {
     top: number;
     left: number;
     strategy: Strategy;
@@ -33,6 +33,7 @@ export declare enum Position {
     BELOW_LEFT = "BELOW_LEFT",
     BELOW_RIGHT = "BELOW_RIGHT"
 }
+export declare const defaultPositionStrategy: PositioningStrategy<Position>;
 interface State<Strategy> {
     top?: number;
     left?: number;

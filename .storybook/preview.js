@@ -1,5 +1,3 @@
-import { addDecorator } from '@storybook/react';
+import globalStyle from '../src/storybook/decorators/global-style';
 
-import { globalStyleDecorator } from '../src/storybook/decorators';
-
-addDecorator(globalStyleDecorator);
+export const decorators = [globalStyle];

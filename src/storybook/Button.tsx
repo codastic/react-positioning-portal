@@ -6,7 +6,6 @@ const Button = styled.button`
   background-color: ${COLORS.primary};
   padding: 8px 16px;
   color: ${COLORS.textInvert};
-  text-transform: uppercase;
   border-radius: 4px;
   letter-spacing: 0.03;
   outline: none;

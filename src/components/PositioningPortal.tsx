@@ -45,7 +45,7 @@ export enum Position {
   ABOVE_LEFT = 'ABOVE_LEFT',
   ABOVE_RIGHT = 'ABOVE_RIGHT',
   BELOW_LEFT = 'BELOW_LEFT',
-  BELOW_RIGHT = 'BELOW_RIGHT'
+  BELOW_RIGHT = 'BELOW_RIGHT',
 }
 
 const renderProps: <Strategy>(
@@ -54,7 +54,7 @@ const renderProps: <Strategy>(
 ) => React.ReactNode = (element, props) =>
   typeof element === 'function' ? element(props) : element;
 
-const defaultPositionStrategy: PositioningStrategy<Position> = (
+export const defaultPositionStrategy: PositioningStrategy<Position> = (
   parentRect: ClientRect,
   portalRect: ClientRect
   /* props: Props<Position> */
@@ -98,7 +98,7 @@ const defaultPositionStrategy: PositioningStrategy<Position> = (
   return {
     top,
     left,
-    strategy
+    strategy,
   };
 };
 
@@ -116,7 +116,7 @@ interface State<Strategy> {
 }
 
 const KEYCODES = {
-  ESCAPE: 27
+  ESCAPE: 27,
 };
 
 const EVENT_CONTEXT_KEY = 'PositioningPortal-context';
@@ -132,7 +132,7 @@ class PositioningPortal<Strategy = Position> extends React.Component<
     onShouldClose: noop,
     closeOnOutsideClick: true,
     closeOnKeyDown: (event: KeyboardEvent) => event.keyCode === KEYCODES.ESCAPE,
-    positionStrategy: defaultPositionStrategy
+    positionStrategy: defaultPositionStrategy,
   };
 
   public state: State<Strategy> = {
@@ -145,7 +145,7 @@ class PositioningPortal<Strategy = Position> extends React.Component<
     transitionActive: false,
     shouldRender: false,
     scrollParents: [],
-    strategy: null
+    strategy: null,
   };
 
   private portalRef = React.createRef<HTMLDivElement>();
@@ -185,7 +185,7 @@ class PositioningPortal<Strategy = Position> extends React.Component<
     );
 
     // Remove scroll event listeners
-    this.state.scrollParents.forEach(node =>
+    this.state.scrollParents.forEach((node) =>
       node.removeEventListener('scroll', this.close, false)
     );
   }
@@ -265,13 +265,13 @@ class PositioningPortal<Strategy = Position> extends React.Component<
     }
 
     // Remove scroll event listeners
-    this.state.scrollParents.forEach(node =>
+    this.state.scrollParents.forEach((node) =>
       node.removeEventListener('scroll', this.close, false)
     );
 
     this.setState({
       isOpen: false,
-      scrollParents: []
+      scrollParents: [],
     });
 
     this.props.onClose();
@@ -287,12 +287,12 @@ class PositioningPortal<Strategy = Position> extends React.Component<
   ) => {
     event.nativeEvent[EVENT_CONTEXT_KEY] = [
       ...(event.nativeEvent[EVENT_CONTEXT_KEY] || []),
-      this
+      this,
     ];
   };
 
   private preRenderPortal = () =>
-    new Promise<void>(resolve => {
+    new Promise<void>((resolve) => {
       // A tricky way to get the first child DOM element of the fragment of this component.
       // Unfortunately there seems to be no way to achieve this with refs.
       const parentDom = ReactDOM.findDOMNode(this);
@@ -303,7 +303,7 @@ class PositioningPortal<Strategy = Position> extends React.Component<
         let scrollParents = [];
         // Register scroll listener on all scrollable parents to close the portal on scroll
         scrollParents = getScrollParents(parentDom as HTMLElement);
-        scrollParents.forEach(node =>
+        scrollParents.forEach((node) =>
           node.addEventListener('scroll', this.close, false)
         );
 
@@ -317,7 +317,7 @@ class PositioningPortal<Strategy = Position> extends React.Component<
             strategy: null,
             parentRect,
             portalRect: null,
-            scrollParents
+            scrollParents,
           },
           resolve
         );
@@ -327,7 +327,7 @@ class PositioningPortal<Strategy = Position> extends React.Component<
     });
 
   private finalRenderPortal = () =>
-    new Promise<void>(resolve => {
+    new Promise<void>((resolve) => {
       if (
         this.state.isOpen &&
         !this.state.isPositioned &&
@@ -348,7 +348,7 @@ class PositioningPortal<Strategy = Position> extends React.Component<
             left,
             strategy,
             top,
-            portalRect
+            portalRect,
           },
           resolve
         );
@@ -368,7 +368,7 @@ class PositioningPortal<Strategy = Position> extends React.Component<
       isOpen,
       strategy,
       transitionActive,
-      shouldRender
+      shouldRender,
     } = this.state;
     const relatedWidth = parentRect ? parentRect.width : 0;
     const relatedHeight = parentRect ? parentRect.height : 0;
@@ -378,7 +378,7 @@ class PositioningPortal<Strategy = Position> extends React.Component<
       width: portalRect ? `${portalRect.width}px` : 'auto',
       left: `${left}px`,
       top: `${top}px`,
-      visibility: isPositioned ? 'visible' : 'hidden'
+      visibility: isPositioned ? 'visible' : 'hidden',
     };
 
     const renderPortal = () =>
@@ -389,9 +389,9 @@ class PositioningPortal<Strategy = Position> extends React.Component<
             ref: this.portalRef,
             style: {
               ...portalStyle,
-              ...((portalElement && portalElement.props.style) || {})
+              ...((portalElement && portalElement.props.style) || {}),
             },
-            onClick: this.markClickEvent
+            onClick: this.markClickEvent,
           },
           renderProps<Strategy>(portalContent, {
             close: this.close,
@@ -401,7 +401,7 @@ class PositioningPortal<Strategy = Position> extends React.Component<
             isOpen,
             isPositioned,
             relatedWidth,
-            relatedHeight
+            relatedHeight,
           })
         ),
         rootNode || window.document.body

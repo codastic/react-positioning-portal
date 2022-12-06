@@ -1,6 +1,6 @@
-/// <reference types="react" />
-declare const _default: {
-    title: string;
-};
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Position } from './PositioningPortal';
+import PositioningPortalWithState from './PositioningPortalWithState';
+declare const _default: ComponentMeta<typeof PositioningPortalWithState>;
 export default _default;
-export declare const base: () => JSX.Element;
+export declare const Base: ComponentStory<PositioningPortalWithState<Position>>;

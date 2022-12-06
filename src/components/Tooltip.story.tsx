@@ -1,12 +1,14 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { action } from '@storybook/addon-actions';
-import { withState, Store } from '@dump247/storybook-state';
 
 import Button from '../storybook/Button';
 import { COLORS } from '../storybook/styles';
 
-import PositioningPortal, { PositioningStrategy } from './PositioningPortal';
+import { PositioningStrategy } from './PositioningPortal';
+import PositioningPortalWithState from './PositioningPortalWithState';
+import { extendStory } from '../storybook/utils';
+import scrollable from '../storybook/decorators/scrollable';
+import { ComponentStory } from '@storybook/react';
 
 enum POSITION {
   TOP = 'top',
@@ -242,90 +244,33 @@ export default {
   title: 'Example: Tooltip'
 };
 
-export const base = withState(
-  { isOpen: false },
-  (store: Store<{ isOpen: boolean }>) => (
-    <PositioningPortal
-      positionStrategy={positionStrategy(POSITION.RIGHT)}
-      isOpen={store.state.isOpen}
-      onOpen={action('onOpen')}
-      onShouldClose={() => store.set({ isOpen: false })}
-      portalContent={({ strategy }) => (
-        <Tooltip
-          position={strategy ? strategy.position : undefined}
-          shift={strategy ? strategy.shift : undefined}
-        >
-          Tooltip positioned with portal.
-        </Tooltip>
-      )}
+export const Base: ComponentStory<PositioningPortalWithState<{
+  position: POSITION;
+  shift: number;
+}>> = function(args) {
+  return <PositioningPortalWithState {...args} />;
+};
+Base.args = {
+  positionStrategy: positionStrategy(POSITION.RIGHT),
+  portalContent: ({ strategy }) => (
+    <Tooltip
+      position={strategy ? strategy.position : undefined}
+      shift={strategy ? strategy.shift : undefined}
     >
-      <Button
-        type="button"
-        onMouseEnter={() => store.set({ isOpen: true })}
-        onMouseLeave={() => store.set({ isOpen: false })}
-      >
-        Open Tooltip
-      </Button>
-    </PositioningPortal>
+      Tooltip positioned with portal.
+    </Tooltip>
+  ),
+  children: ({ open, close }) => (
+    <Button type="button" onMouseEnter={open} onMouseLeave={close}>
+      Hover for tooltip
+    </Button>
   )
-);
+};
 
-export const scrollableTest = withState(
-  { isOpen: false },
-  (store: Store<{ isOpen: boolean }>) => (
-    <div style={{ margin: '95vh 95vw', display: 'inline-block' }}>
-      <PositioningPortal
-        positionStrategy={positionStrategy(POSITION.RIGHT)}
-        isOpen={store.state.isOpen}
-        onOpen={action('onOpen')}
-        onShouldClose={() => store.set({ isOpen: false })}
-        portalContent={({ strategy }) => (
-          <Tooltip
-            position={strategy ? strategy.position : undefined}
-            shift={strategy ? strategy.shift : undefined}
-          >
-            Tooltip positioned with portal.
-          </Tooltip>
-        )}
-      >
-        <Button
-          type="button"
-          onMouseEnter={() => store.set({ isOpen: true })}
-          onMouseLeave={() => store.set({ isOpen: false })}
-        >
-          Open Tooltip
-        </Button>
-      </PositioningPortal>
-    </div>
-  )
-);
+export const ScrollableTest = extendStory(Base);
+ScrollableTest.decorators = [scrollable];
 
-export const preferredPositionTop = withState(
-  { isOpen: false },
-  (store: Store<{ isOpen: boolean }>) => (
-    <div style={{ margin: '95vh 95vw', display: 'inline-block' }}>
-      <PositioningPortal
-        positionStrategy={positionStrategy(POSITION.TOP)}
-        isOpen={store.state.isOpen}
-        onOpen={action('onOpen')}
-        onShouldClose={() => store.set({ isOpen: false })}
-        portalContent={({ strategy }) => (
-          <Tooltip
-            position={strategy ? strategy.position : undefined}
-            shift={strategy ? strategy.shift : undefined}
-          >
-            Tooltip positioned with portal.
-          </Tooltip>
-        )}
-      >
-        <Button
-          type="button"
-          onMouseEnter={() => store.set({ isOpen: true })}
-          onMouseLeave={() => store.set({ isOpen: false })}
-        >
-          Open Tooltip
-        </Button>
-      </PositioningPortal>
-    </div>
-  )
-);
+export const PreferredPositionTop = extendStory(Base, {
+  positionStrategy: positionStrategy(POSITION.TOP)
+});
+PreferredPositionTop.decorators = [scrollable];

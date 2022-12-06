@@ -1,8 +1,11 @@
 const path = require('path');
 
 module.exports = {
-  stories: ['../src/**/*.stories.tsx'],
+  stories: ['../src/**/*.story.tsx'],
   addons: [
+    {
+      name: '@storybook/addon-essentials'
+    },
     {
       name: '@storybook/addon-storysource',
       options: {
@@ -14,19 +17,9 @@ module.exports = {
           parser: 'typescript'
         }
       }
-    },
-    '@storybook/addon-actions/register'
+    }
   ],
-  webpackFinal: async config => {
-    config.module.rules.push({
-      test: /\.(ts|tsx)$/,
-      use: [
-        {
-          loader: require.resolve('ts-loader')
-        }
-      ]
-    });
-    config.resolve.extensions.push('.ts', '.tsx');
-    return config;
+  core: {
+    builder: 'webpack5'
   }
 };

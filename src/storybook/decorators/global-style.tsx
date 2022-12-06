@@ -1,10 +1,9 @@
 import * as React from 'react';
 import { createGlobalStyle } from 'styled-components';
-import { addDecorator } from '@storybook/react';
 
-import { COLORS } from './styles';
+import { DecoratorFunction } from '@storybook/client-api';
 
-type DecoratorFunction = Parameters<typeof addDecorator>[0];
+import { COLORS } from '../styles';
 
 const GlobalStyle = createGlobalStyle`
   *, *:after, *:before {
@@ -17,9 +16,11 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-export const globalStyleDecorator: DecoratorFunction = story => (
+const globalStyle: DecoratorFunction = story => (
   <>
     <GlobalStyle />
     {story()}
   </>
 );
+
+export default globalStyle;

@@ -13,6 +13,7 @@ export interface Props<Strategy> {
   onOpen?: () => void;
   onClose?: () => void;
   onShouldClose?: () => void;
+  closeOnScroll?: boolean;
   closeOnOutsideClick?: boolean;
   closeOnKeyDown?: (event: KeyboardEvent) => boolean;
   isOpen?: boolean;
@@ -127,6 +128,7 @@ class PositioningPortal<Strategy = Position> extends React.Component<
 > {
   public static defaultProps = {
     isOpen: false,
+    closeOnScroll: true,
     onOpen: noop,
     onClose: noop,
     onShouldClose: noop,
@@ -185,9 +187,11 @@ class PositioningPortal<Strategy = Position> extends React.Component<
     );
 
     // Remove scroll event listeners
-    this.state.scrollParents.forEach((node) =>
-      node.removeEventListener('scroll', this.close, false)
-    );
+    if (this.props.closeOnScroll) {
+      this.state.scrollParents.forEach((node) =>
+        node.removeEventListener('scroll', this.close, false)
+      );
+    }
   }
 
   public close = () => {
@@ -300,12 +304,15 @@ class PositioningPortal<Strategy = Position> extends React.Component<
       if (parentDom && parentDom.nodeType === Node.ELEMENT_NODE) {
         const parentRect = (parentDom as Element).getBoundingClientRect();
 
-        let scrollParents = [];
+        let scrollParents: (HTMLElement | Window)[] = [];
+
         // Register scroll listener on all scrollable parents to close the portal on scroll
-        scrollParents = getScrollParents(parentDom as HTMLElement);
-        scrollParents.forEach((node) =>
-          node.addEventListener('scroll', this.close, false)
-        );
+        if (this.props.closeOnScroll) {
+          scrollParents = getScrollParents(parentDom as HTMLElement);
+          scrollParents.forEach((node) =>
+            node.addEventListener('scroll', this.close, false)
+          );
+        }
 
         this.setState(
           {

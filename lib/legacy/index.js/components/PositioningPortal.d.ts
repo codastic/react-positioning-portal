@@ -6,6 +6,7 @@ export interface Props<Strategy> {
     onOpen?: () => void;
     onClose?: () => void;
     onShouldClose?: () => void;
+    closeOnScroll?: boolean;
     closeOnOutsideClick?: boolean;
     closeOnKeyDown?: (event: KeyboardEvent) => boolean;
     isOpen?: boolean;
@@ -49,6 +50,7 @@ interface State<Strategy> {
 declare class PositioningPortal<Strategy = Position> extends React.Component<Props<Strategy>, State<Strategy>> {
     static defaultProps: {
         isOpen: boolean;
+        closeOnScroll: boolean;
         onOpen: () => void;
         onClose: () => void;
         onShouldClose: () => void;

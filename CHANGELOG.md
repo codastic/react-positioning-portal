@@ -1,4 +1,10 @@
 
+### v0.7.0 / 2023-07-05 14:43:36
+
+- Bump webpack from 5.75.0 to 5.76.1 (i: dependabot[bot], r: Mario Volke, c: [c11639f](https://github.com/codastic/react-positioning-portal/commit/c11639f))
+- Bump json5 from 1.0.1 to 1.0.2 (i: dependabot[bot], r: Mario Volke, c: [da74b75](https://github.com/codastic/react-positioning-portal/commit/da74b75))
+- feat(react-positioning-portal): add prop to close portal on scroll (i: TommyBacco, r: Mario Volke, c: [3753bc0](https://github.com/codastic/react-positioning-portal/commit/3753bc0))
+
 ### v0.6.0 / 2022-12-06 12:19:23
 
 - Add support for React 18 and update dependencies and storybook (i: Mario Volke, r: Christian Ranz, c: [d6976e5](https://github.com/codastic/react-positioning-portal/commit/d6976e5))

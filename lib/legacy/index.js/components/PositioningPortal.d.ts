@@ -60,6 +60,7 @@ declare class PositioningPortal<Strategy = Position> extends React.Component<Pro
     };
     state: State<Strategy>;
     private portalRef;
+    private parentRef;
     componentDidMount(): void;
     componentDidUpdate(prevProps: Props<Strategy>): void;
     componentWillUnmount(): void;

@@ -12,6 +12,7 @@ export interface Props<Strategy> {
     isOpen?: boolean;
     positionStrategy?: PositioningStrategy<Strategy>;
     rootNode?: HTMLElement;
+    as?: React.ElementType;
 }
 export interface PortalContentRenderProps<Strategy> {
     close: () => void;
@@ -74,6 +75,6 @@ declare class PositioningPortal<Strategy = Position> extends React.Component<Pro
     private markClickEvent;
     private preRenderPortal;
     private finalRenderPortal;
-    render(): JSX.Element;
+    render(): React.ReactElement<any, string | React.JSXElementConstructor<any>>;
 }
 export default PositioningPortal;

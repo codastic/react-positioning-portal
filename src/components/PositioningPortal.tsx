@@ -19,6 +19,12 @@ export interface Props<Strategy> {
   isOpen?: boolean;
   positionStrategy?: PositioningStrategy<Strategy>;
   rootNode?: HTMLElement;
+  /**
+   * The component or HTML tag to render as the wrapper for the children.
+   * 
+   * @default 'span'
+   */
+  as?: React.ElementType;
 }
 
 export interface PortalContentRenderProps<Strategy> {
@@ -418,10 +424,12 @@ class PositioningPortal<Strategy = Position> extends React.Component<
     const shouldRenderPortal = shouldRender && (isOpen || transitionActive);
 
     return (
-      <div ref={this.parentRef}>
-        {children}
-        {shouldRenderPortal && renderPortal()}
-      </div>
+      React.createElement(
+        this.props.as || 'span',
+        { ref: this.parentRef },
+        children,
+        shouldRenderPortal && renderPortal()
+      )
     );
   }
 }

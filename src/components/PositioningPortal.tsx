@@ -8,8 +8,8 @@ export interface Props<Strategy> {
   children: React.ReactNode;
   portalElement?: React.ReactElement;
   portalContent:
-    | React.ReactNode
-    | ((params: PortalContentRenderProps<Strategy>) => React.ReactNode);
+  | React.ReactNode
+  | ((params: PortalContentRenderProps<Strategy>) => React.ReactNode);
   onOpen?: () => void;
   onClose?: () => void;
   onShouldClose?: () => void;
@@ -19,6 +19,12 @@ export interface Props<Strategy> {
   isOpen?: boolean;
   positionStrategy?: PositioningStrategy<Strategy>;
   rootNode?: HTMLElement;
+  /**
+   * The component or HTML tag to render as the wrapper for the children.
+   * 
+   * @default 'span'
+   */
+  as?: React.ElementType;
 }
 
 export interface PortalContentRenderProps<Strategy> {
@@ -53,7 +59,7 @@ const renderProps: <Strategy>(
   element: Props<Strategy>['portalContent'],
   props: PortalContentRenderProps<Strategy>
 ) => React.ReactNode = (element, props) =>
-  typeof element === 'function' ? element(props) : element;
+    typeof element === 'function' ? element(props) : element;
 
 export const defaultPositionStrategy: PositioningStrategy<Position> = (
   parentRect: ClientRect,
@@ -64,7 +70,7 @@ export const defaultPositionStrategy: PositioningStrategy<Position> = (
   // but if there also isn't enough space at the top, open to the bottom.
   const openAbove =
     parentRect.top + parentRect.height + portalRect.height >
-      (window.document.documentElement || window.document.body).clientHeight &&
+    (window.document.documentElement || window.document.body).clientHeight &&
     parentRect.top - portalRect.height > 0;
 
   const top = openAbove
@@ -75,7 +81,7 @@ export const defaultPositionStrategy: PositioningStrategy<Position> = (
   // but if there also isn't enough space at the right, open to the left.
   const alignRight =
     parentRect.left + portalRect.width >
-      (window.document.documentElement || window.document.body).clientWidth &&
+    (window.document.documentElement || window.document.body).clientWidth &&
     parentRect.left - portalRect.width > 0;
 
   const left = !alignRight
@@ -151,6 +157,7 @@ class PositioningPortal<Strategy = Position> extends React.Component<
   };
 
   private portalRef = React.createRef<HTMLDivElement>();
+  private parentRef = React.createRef<HTMLDivElement>();
 
   public componentDidMount() {
     window.document.addEventListener('keydown', this.handleKeydown, false);
@@ -232,7 +239,7 @@ class PositioningPortal<Strategy = Position> extends React.Component<
       return;
     }
 
-    const parentDom = ReactDOM.findDOMNode(this);
+    const parentDom = this.parentRef.current;
     if (parentDom && parentDom.contains(event.target as Node)) {
       return;
     }
@@ -299,7 +306,7 @@ class PositioningPortal<Strategy = Position> extends React.Component<
     new Promise<void>((resolve) => {
       // A tricky way to get the first child DOM element of the fragment of this component.
       // Unfortunately there seems to be no way to achieve this with refs.
-      const parentDom = ReactDOM.findDOMNode(this);
+      const parentDom = this.parentRef.current;
 
       if (parentDom && parentDom.nodeType === Node.ELEMENT_NODE) {
         const parentRect = (parentDom as Element).getBoundingClientRect();
@@ -417,10 +424,12 @@ class PositioningPortal<Strategy = Position> extends React.Component<
     const shouldRenderPortal = shouldRender && (isOpen || transitionActive);
 
     return (
-      <>
-        {children}
-        {shouldRenderPortal && renderPortal()}
-      </>
+      React.createElement(
+        this.props.as || 'span',
+        { ref: this.parentRef },
+        children,
+        shouldRenderPortal && renderPortal()
+      )
     );
   }
 }

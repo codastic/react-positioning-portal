@@ -1,4 +1,8 @@
 
+### v0.8.0 / 2025-11-18 14:30:24
+
+- fix(positioning-portal): replace findDOMNode with ref (i: bounty, r: Mario Volke, c: [408f47c](https://github.com/codastic/react-positioning-portal/commit/408f47c))
+
 ### v0.7.0 / 2023-07-05 14:43:36
 
 - Bump webpack from 5.75.0 to 5.76.1 (i: dependabot[bot], r: Mario Volke, c: [c11639f](https://github.com/codastic/react-positioning-portal/commit/c11639f))

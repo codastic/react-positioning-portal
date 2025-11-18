@@ -12,6 +12,11 @@ export interface Props<Strategy> {
     isOpen?: boolean;
     positionStrategy?: PositioningStrategy<Strategy>;
     rootNode?: HTMLElement;
+    /**
+     * The component or HTML tag to render as the wrapper for the children.
+     *
+     * @default 'span'
+     */
     as?: React.ElementType;
 }
 export interface PortalContentRenderProps<Strategy> {
